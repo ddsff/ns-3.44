@@ -104,7 +104,17 @@ namespace ns3 {
     Object::DoDispose();
   }
 
-  void QbbNetDevice::TransmitComplete(){}
+  void QbbNetDevice::TransmitComplete(){
+    NS_LOG_FUNCTION(this);
+    NS_ASSERT_MSG(m_txMachineState == BUSY, "Must be BUSY if transmitting");
+    m_txMachineState = READY;
+    NS_ASSERT_MSG(m_currentPkt != 0, "QbbNetDevice::TransmitComplete(): m_currentPkt zero");
+    m_phyTxEndTrace(m_currentPkt);
+    m_currentPkt = 0;
+    DequeueAndTransmit();
+  }
+  
+  void QbbNetDevice::DequeueAndTransmit() {}
 
 
 

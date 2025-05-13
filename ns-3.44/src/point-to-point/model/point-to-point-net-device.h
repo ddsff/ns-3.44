@@ -197,11 +197,6 @@ class PointToPointNetDevice : public NetDevice
 
   private:
     /**
-     * @brief Dispose of the object
-     */
-    void DoDispose() override;
-
-    /**
      * @returns the address of the remote device connected to this device
      * through the point to point channel.
      */
@@ -260,6 +255,12 @@ class PointToPointNetDevice : public NetDevice
     /**
      * Enumeration of the states of the transmit machine of the net device.
      */
+    protected:
+    /**
+     * @brief Dispose of the object
+     */
+    void DoDispose() override;
+
     enum TxMachineState
     {
         READY, /**< The transmitter is ready to begin transmission of a packet */
