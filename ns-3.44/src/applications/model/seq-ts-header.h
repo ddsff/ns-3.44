@@ -47,6 +47,8 @@ class SeqTsHeader : public Header
      * @return the time stamp
      */
     Time GetTs() const;
+    void SetPG(uint16_t pg);
+    uint16_t GetPG() const;
 
     /**
      * @brief Get the type ID.
@@ -63,6 +65,7 @@ class SeqTsHeader : public Header
   private:
     uint32_t m_seq; //!< Sequence number
     uint64_t m_ts;  //!< Timestamp
+    uint16_t m_pg;
 };
 
 } // namespace ns3

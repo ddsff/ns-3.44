@@ -227,6 +227,7 @@ class Ipv4GlobalRouting : public Ipv4RoutingProtocol
     /// Set to true if packets are randomly routed among ECMP; set to false for using only one route
     /// consistently
     bool m_randomEcmpRouting;
+    bool m_flowEcmpRouting;
     /// Set to true if this interface should respond to interface events by globally recomputing
     /// routes
     bool m_respondToInterfaceEvents;
@@ -260,7 +261,8 @@ class Ipv4GlobalRouting : public Ipv4RoutingProtocol
      * @param oif output interface if any (put 0 otherwise)
      * @return Ipv4Route to route the packet to reach dest address
      */
-    Ptr<Ipv4Route> LookupGlobal(Ipv4Address dest, Ptr<NetDevice> oif = nullptr);
+    Ptr<Ipv4Route> LookupGlobal(const Ipv4Header& header, Ptr<const Packet> ipPayload, Ptr<NetDevice> oif = nullptr);
+    uint32_t GetTupleValue(const Ipv4Header& header, Ptr<const Packet> ipPayload);
 
     HostRoutes m_hostRoutes;             //!< Routes to hosts
     NetworkRoutes m_networkRoutes;       //!< Routes to networks
